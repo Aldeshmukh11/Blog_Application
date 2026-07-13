@@ -1,6 +1,6 @@
 package com.backend.blog.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -10,11 +10,13 @@ import com.backend.blog.entities.User;
 import com.backend.blog.exceptions.ResourceNotFoundException;
 import com.backend.blog.repositories.UserRepo;
 
+import lombok.AllArgsConstructor;
+
 @Service
+@AllArgsConstructor
 public class CustomUserDetailService implements UserDetailsService{
 
-	@Autowired
-	private UserRepo userRepo;
+	private final UserRepo userRepo;
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

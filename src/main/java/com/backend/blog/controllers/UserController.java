@@ -1,8 +1,6 @@
 package com.backend.blog.controllers;
 
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -20,13 +18,15 @@ import com.backend.blog.payloads.UserDto;
 import com.backend.blog.services.UserService;
 
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 
 @RestController
 @RequestMapping("/api/users")
+@AllArgsConstructor
 public class UserController {
 
-	@Autowired
-	private UserService userService;
+
+	private final UserService userService;
 	
 	//POST - create user
 	@PostMapping("/create")
@@ -38,7 +38,7 @@ public class UserController {
 	//PUT - update user
 	@PutMapping("/{userId}")
 	public ResponseEntity<UserDto> 
-	         updateUser(@Valid @RequestBody UserDto userDto,@PathVariable("userId") Integer uId){
+	         updateUser(@Valid @RequestBody UserDto userDto, @PathVariable("userId") Integer uId){
 		UserDto updatedUserDto = this.userService.updateUser(userDto, uId);
 		return ResponseEntity.ok(updatedUserDto);
 	}

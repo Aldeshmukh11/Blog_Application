@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -24,20 +23,23 @@ import com.backend.blog.repositories.PostRepo;
 import com.backend.blog.repositories.UserRepo;
 import com.backend.blog.services.PostService;
 
+import lombok.AllArgsConstructor;
+
 @Service
+@AllArgsConstructor
 public class PostServiceImpl implements PostService {
 
-	@Autowired
-	private PostRepo postRepo;
 	
-	@Autowired
-	private ModelMapper modelMapper;
+	private final PostRepo postRepo;
 	
-	@Autowired
-	private UserRepo userRepo;
 	
-	@Autowired
-	private CategoryRepo categoryRepo;
+	private final ModelMapper modelMapper;
+	
+	
+	private final UserRepo userRepo;
+	
+	
+	private final CategoryRepo categoryRepo;
 	
 	
 	@Override

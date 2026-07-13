@@ -17,21 +17,20 @@ import com.backend.blog.repositories.RoleRepo;
 import com.backend.blog.repositories.UserRepo;
 import com.backend.blog.services.UserService;
 
-@Service
-public class UserServiceImpl implements UserService {
+import lombok.AllArgsConstructor;
 
-	@Autowired
-	private UserRepo userRepo;
+@Service
+@AllArgsConstructor
+public class UserServiceImpl implements UserService {
 	
-	@Autowired
-	private ModelMapper modelMapper;
+	private final UserRepo userRepo;
 	
-	@Autowired
-	private PasswordEncoder passwordEncoder;
+	private final ModelMapper modelMapper;
 	
-	@Autowired
-	private RoleRepo roleRepo;
+	private final PasswordEncoder passwordEncoder;
 	
+	private final RoleRepo roleRepo;
+
 	@Override
 	public UserDto createUser(UserDto userDto) {
 		User user = this.dtoToUser(userDto);

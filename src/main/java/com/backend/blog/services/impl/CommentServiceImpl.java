@@ -1,7 +1,6 @@
 package com.backend.blog.services.impl;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.backend.blog.entities.Comment;
@@ -12,17 +11,20 @@ import com.backend.blog.repositories.CommentRepo;
 import com.backend.blog.repositories.PostRepo;
 import com.backend.blog.services.CommentService;
 
+import lombok.AllArgsConstructor;
+
 @Service
+@AllArgsConstructor
 public class CommentServiceImpl implements CommentService {
 	
-	@Autowired
-	private PostRepo postRepo;
 	
-	@Autowired
-	private CommentRepo commentRepo;
+	private final PostRepo postRepo;
 	
-	@Autowired
-	private ModelMapper modelMapper;
+	
+	private final CommentRepo commentRepo;
+	
+	
+	private final ModelMapper modelMapper;
 
 	@Override
 	public CommentDto createComment(CommentDto commentDto, Integer postId) {

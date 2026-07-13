@@ -41,15 +41,16 @@ public class SecurityConfig{
 		
     	http
         .csrf(csrf -> csrf.disable()) // Disable CSRF
-        .authorizeHttpRequests(auth -> auth
-            .requestMatchers(AppConstants.PUBLIC_URLS).permitAll() // public endpoints
-            .anyRequest().authenticated() // Require authentication for all requests
+        .authorizeHttpRequests(
+              auth -> auth
+             		  .requestMatchers(AppConstants.PUBLIC_URLS).permitAll() // public endpoints
+             		  .anyRequest().authenticated() // Require authentication for all requests
         )
-        .exceptionHandling(exception -> 
-        exception.authenticationEntryPoint(this.jwtAuthenticationEntryPoint)
+        .exceptionHandling(
+        		exception -> exception.authenticationEntryPoint(this.jwtAuthenticationEntryPoint)
         )
-        .sessionManagement(session -> 
-        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+        .sessionManagement(
+        		session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
     	
     	http.addFilterBefore(this.jwtAuthenticationFilter,  UsernamePasswordAuthenticationFilter.class);
 
@@ -82,8 +83,7 @@ public class SecurityConfig{
     @Bean
     AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
         AuthenticationManagerBuilder builder = http.getSharedObject(AuthenticationManagerBuilder.class);
-        builder.userDetailsService(customUserDetailService)
-               .passwordEncoder(passwordEncoder());
+        builder.userDetailsService(customUserDetailService).passwordEncoder(passwordEncoder());
         return builder.build();
     }
 

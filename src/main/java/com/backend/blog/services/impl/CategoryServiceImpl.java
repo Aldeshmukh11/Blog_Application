@@ -3,7 +3,6 @@ package com.backend.blog.services.impl;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.backend.blog.entities.Category;
 import com.backend.blog.exceptions.ResourceNotFoundException;
@@ -11,14 +10,15 @@ import com.backend.blog.payloads.CategoryDto;
 import com.backend.blog.repositories.CategoryRepo;
 import com.backend.blog.services.CategoryService;
 
+import lombok.AllArgsConstructor;
+
 @Service
+@AllArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
+
+	private final CategoryRepo categoryRepo;
 	
-	@Autowired
-	private CategoryRepo categoryRepo;
-	
-	@Autowired
-	private ModelMapper modelMapper;
+	private final ModelMapper modelMapper;
 
 	@Override
 	public CategoryDto createCategory(CategoryDto categoryDto) {

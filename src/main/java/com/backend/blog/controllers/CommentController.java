@@ -1,6 +1,6 @@
 package com.backend.blog.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,12 +14,14 @@ import com.backend.blog.payloads.ApiResponse;
 import com.backend.blog.payloads.CommentDto;
 import com.backend.blog.services.CommentService;
 
+import lombok.AllArgsConstructor;
+
 @RestController
 @RequestMapping("/api")
+@AllArgsConstructor
 public class CommentController {
 
-	@Autowired
-	private CommentService commentService;
+	private final CommentService commentService;
 	
 	@PostMapping("/post/{postId}/comment")
 	public ResponseEntity<CommentDto> createComment(

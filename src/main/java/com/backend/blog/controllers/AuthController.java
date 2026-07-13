@@ -1,6 +1,5 @@
 package com.backend.blog.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,26 +20,25 @@ import com.backend.blog.payloads.UserDto;
 import com.backend.blog.security.JwtTokenHelper;
 import com.backend.blog.services.UserService;
 
+import lombok.AllArgsConstructor;
+
 @RestController
 @RequestMapping("/api/v1/auth/")
+@AllArgsConstructor
 public class AuthController {
 	
-	@Autowired
-	private JwtTokenHelper jwtTokenHelper;
+
+	private final JwtTokenHelper jwtTokenHelper;
 	
-	@Autowired
-	private UserDetailsService userDetailsService;
+	private final UserDetailsService userDetailsService;
 	
-	@Autowired
-	private AuthenticationManager authenticationManager;
-	
-	@Autowired
-	private UserService userService;
+	private final AuthenticationManager authenticationManager;
+
+	private final UserService userService;
 	
 	@PostMapping("/login")
 	public ResponseEntity<JwtAuthResponse> createToken(
-			@RequestBody JwtAuthRequest request
-			){
+			@RequestBody JwtAuthRequest request){
 		this.authenticate(request.getUsername(), request.getPassword());
 		
 		UserDetails userDetails = this.userDetailsService.loadUserByUsername(request.getUsername());

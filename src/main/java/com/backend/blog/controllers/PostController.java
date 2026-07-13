@@ -3,8 +3,6 @@ package com.backend.blog.controllers;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -29,16 +27,22 @@ import com.backend.blog.services.FileService;
 import com.backend.blog.services.PostService;
 
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.AllArgsConstructor;
 
 @RestController
 @RequestMapping("/api/")
 public class PostController {
 
-	@Autowired
-	private PostService postService;
+	private final PostService postService;
 
-	@Autowired
-	private FileService fileService;
+	private final FileService fileService;
+	
+
+	public PostController(PostService postService, FileService fileService) {
+		super();
+		this.postService = postService;
+		this.fileService = fileService;
+	}
 
 	@Value("${project.image}")
 	private String path;
